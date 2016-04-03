@@ -1,5 +1,6 @@
 var bindEditor = require('./lib/socialCalcBinding')
   , SocialCalc = require('socialcalc')
+require('./lib/SocialCalc_broadcast')
 
 module.exports = setup
 module.exports.consumes = ['ui', 'editor']
@@ -15,7 +16,10 @@ function setup(plugin, imports, register) {
   editor.registerEditor('SocialCalc', 'spreadsheet', 'A spreadsheet editor'
   , function(el, onClose) {
 
+    window.addEventListener('resize', resizeEditor)
+
     onClose(_ => {
+      window.removeEventListener('resize', resizeEditor)
     })
 
     var socialCalcControl, doc
@@ -39,11 +43,25 @@ function setup(plugin, imports, register) {
       SocialCalc.ConstantsSetImagePrefix(ui.baseURL+'/static/socialcalc/images/sc_')
       socialCalcControl = new SocialCalc.SpreadsheetControl()
       socialCalcControl.InitializeSpreadsheetControl(el /*, height, width, spacebelow*/)
+      el.style['height'] = '100%'
+      el.firstChild.style['display'] = 'none' // Hide until init
+      el.firstChild.style['width'] = '100%'
+      el.firstChild.style['height'] = '100%'
 
       // bind editor
       doc = bindEditor(socialCalcControl)
+
+      doc.once('editableInitialized', () => setImmediate(resizeEditor)) // defer, because plugins may affect space
+
       return Promise.resolve(doc)
     })
+
+    function resizeEditor() {
+      el.firstChild.style['display'] = 'none'
+      var constraints = el.getBoundingClientRect()
+      socialCalcControl.editor.ResizeTableEditor(constraints.width, constraints.height)
+      el.firstChild.style['display'] = 'block'
+    }
 
   })
   register()
