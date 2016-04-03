@@ -12,6 +12,7 @@ function setup(plugin, imports, register) {
   var orm = imports.orm
 
   ui.registerModule(path.join(__dirname, 'client.js'))
+  ui.registerStaticDir(path.join(__dirname, 'lib')) // for jQuery
   ui.registerStaticDir(path.join(__dirname, '..', 'socialcalc', 'images'))
   ui.registerStylesheet(path.join(__dirname, '..', 'socialcalc', 'socialcalc.css'))
 
