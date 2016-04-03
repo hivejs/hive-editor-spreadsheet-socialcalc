@@ -36,7 +36,7 @@ function setup(plugin, imports, register) {
       document.head.appendChild(script)
     })
     .then(() => {
-      SocialCalc.ConstantsSetImagePrefix(ui.baseURL+'/static/socialcalc/images/')
+      SocialCalc.ConstantsSetImagePrefix(ui.baseURL+'/static/socialcalc/images/sc_')
       socialCalcControl = new SocialCalc.SpreadsheetControl()
       socialCalcControl.InitializeSpreadsheetControl(el /*, height, width, spacebelow*/)
 
