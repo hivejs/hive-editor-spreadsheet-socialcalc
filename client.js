@@ -1,6 +1,7 @@
 var bindEditor = require('./lib/socialCalcBinding')
   , SocialCalc = require('socialcalc')
 require('./lib/SocialCalc_broadcast')
+window.SocialCalc = SocialCalc // Necessary for certain event handlers to work
 
 module.exports = setup
 module.exports.consumes = ['ui', 'editor']
