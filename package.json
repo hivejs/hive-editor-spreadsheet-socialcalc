@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "gulf": "4.x",
-    "socialcalc": "2.x"
+    "socialcalc": "2.x",
+    "spreadsheet-column": "1.x"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
