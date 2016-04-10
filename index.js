@@ -1,5 +1,5 @@
 var path = require('path')
-  , spreadsheetOT = require('./lib/ot-spreadsheet')
+  , spreadsheetOT = require('ot-socialcalc')
 
 module.exports = setup
 module.exports.consumes = ['ui', 'ot', 'importexport', 'sync', 'orm']

@@ -1,6 +1,6 @@
-var bindEditor = require('./lib/socialCalcBinding')
+var bindEditor = require('gulf-socialcalc')
   , SocialCalc = require('socialcalc')
-require('./lib/SocialCalc_broadcast')
+
 window.SocialCalc = SocialCalc // Necessary for certain event handlers to work
 
 module.exports = setup
