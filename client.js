@@ -62,6 +62,7 @@ function setup(plugin, imports, register) {
       var constraints = el.getBoundingClientRect()
       el.firstChild.style['display'] = 'block'
       socialCalcControl.editor.ResizeTableEditor(constraints.width, constraints.height-150)
+      socialCalcControl.sheet.ScheduleSheetCommands('recalc', /*saveundo:*/false, /*isRemote:*/false)
     }
 
   })
