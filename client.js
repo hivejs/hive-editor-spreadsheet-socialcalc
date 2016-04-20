@@ -60,8 +60,8 @@ function setup(plugin, imports, register) {
     function resizeEditor() {
       el.firstChild.style['display'] = 'none'
       var constraints = el.getBoundingClientRect()
-      socialCalcControl.editor.ResizeTableEditor(constraints.width, constraints.height-150)
       el.firstChild.style['display'] = 'block'
+      socialCalcControl.editor.ResizeTableEditor(constraints.width, constraints.height-150)
     }
 
   })
