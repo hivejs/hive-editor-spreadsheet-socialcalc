@@ -31,6 +31,7 @@ function setup(plugin, imports, register) {
   ui.registerStaticDir(path.join(__dirname, 'lib')) // for jQuery
   ui.registerStaticDir(path.join(__dirname, '..', 'socialcalc', 'images'))
   ui.registerStylesheet(path.join(__dirname, '..', 'socialcalc', 'socialcalc.css'))
+  ui.externalizeModule('socialcalc')
 
   ot.registerOTType('spreadsheet', spreadsheetOT)
 

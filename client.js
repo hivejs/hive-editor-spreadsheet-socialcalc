@@ -14,11 +14,6 @@
  * You should have received a copy of the Mozilla Public License
  * along with this program.  If not, see <https://www.mozilla.org/en-US/MPL/2.0/>.
  */
-var bindEditor = require('gulf-socialcalc')
-  , SocialCalc = require('socialcalc')
-
-window.SocialCalc = SocialCalc // Necessary for certain event handlers to work
-
 module.exports = setup
 module.exports.consumes = ['ui', 'editor']
 module.exports.provides = []
@@ -41,23 +36,14 @@ function setup(plugin, imports, register) {
 
     var socialCalcControl, doc
 
-    /*var script = document.createElement('script')
-    script.id = 'SocialCalc'
-    script.src = ui.baseURL+'/static/hive-editor-spreadsheet-socialcalc/lib/SocialCalc.js'
-*/
     // load the editor
-    return new Promise(function(resolve) {
-      return resolve()
-      if (document.querySelector('#SocialCalc'))  {
-        return resolve()
-      }
-      script.onload = function() {
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
+    return ui.requireScript(ui.baseURL+'/static/build/socialcalc.js')
     .then(() => {
+      var bindEditor = require('gulf-socialcalc')
+        , SocialCalc = require('socialcalc')
+      window.SocialCalc = SocialCalc // Necessary for certain event handlers to work
       SocialCalc.ConstantsSetImagePrefix(ui.baseURL+'/static/socialcalc/images/sc_')
+      
       socialCalcControl = new SocialCalc.SpreadsheetControl()
       socialCalcControl.InitializeSpreadsheetControl(el /*, height, width, spacebelow*/)
       el.style['height'] = '100%'
