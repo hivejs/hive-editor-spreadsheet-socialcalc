@@ -29,9 +29,11 @@ function setup(plugin, imports, register) {
   , function(el, onClose) {
 
     window.addEventListener('resize', resizeEditor)
+    window.addEventListener('click', checkFocus)
 
     onClose(_ => {
       window.removeEventListener('resize', resizeEditor)
+      window.removeEventListener('click', checkFocus)
     })
 
     var socialCalcControl, doc
@@ -58,6 +60,18 @@ function setup(plugin, imports, register) {
 
       return Promise.resolve(doc)
     })
+
+    function checkFocus(e) {
+      if (!el.contains(e.target)) {
+        blurEditor()
+      }
+      else if (e.target !== document.activeElement) {
+        document.activeElement.blur()
+      }
+    }
+    function blurEditor() {
+      SocialCalc.Keyboard.passThru = true
+    }
 
     function resizeEditor() {
       el.firstChild.style['display'] = 'none'
